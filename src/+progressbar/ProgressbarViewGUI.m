@@ -28,8 +28,6 @@ classdef ProgressbarViewGUI < progressbar.IProgressbarView
 
             obj.fig = uifigure(namedArgs);
 
-            obj.fig.WindowKeyPressFcn = @obj.keypressed;
-
             obj.d = uiprogressdlg(obj.fig, 'Title','Please Wait', 'Message','Loading');
 
             % Refresh the view for the first time 

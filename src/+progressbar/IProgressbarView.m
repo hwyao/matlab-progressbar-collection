@@ -11,36 +11,35 @@ classdef IProgressbarView < handle
     properties (SetAccess = protected)
         % Application data model.
         Model(1, 1) progressbar.ModelProgressbar
-
+    
         % Listener object used to respond dynamically to model events.
         Listener(:, 1) event.listener {mustBeScalarOrEmpty}
     end
 
-     methods
+    methods
         function obj = IProgressbarView(model)
             %IProgressbarView View interface constructor.
             arguments
                 model(1, 1) progressbar.ModelProgressbar
             end
-
+        
             obj.Model = model; 
             obj.Listener = listener(obj.Model, ... 
                 "DataChanged", @obj.onDataChanged); 
         end 
-
     end
     
-    methods (Abstract, Access = protected)    
-        % UPDATEDATA update the view after the event.
-        %   UPDATEDATA(obj, model) update the view accroding the the data in model.
-        %   This method should be implemented by the subclass.
-        updateData(obj, model)
-    end
-
     methods (Access = protected)
         function onDataChanged(obj, ~, ~) 
             %ONDATACHANGED Listener callback, responding to the model event "DataChanged"
             obj.updateData(obj.Model);
         end
+    end
+    
+    methods (Abstract, Access = protected)  
+        % UPDATEDATA update the view after the event.
+        %   UPDATEDATA(obj, model) update the view accroding the the data in model.
+        %   This method should be implemented by the subclass.
+        updateData(obj, model)
     end
 end

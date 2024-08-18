@@ -50,7 +50,7 @@ classdef ProgressbarCollection < handle
             %       is not update to maximum with STEPPROGRESS.
             %       See also FINISHPROGRESS, STEPPROGRESS
             arguments
-                options.Backend(1,:) char {mustBeMember(options.Backend,{'GUI','CLI'})} = 'GUI'
+                options.Backend(1,:) char {mustBeMember(options.Backend,{'GUI','CLI', 'None'})} = 'GUI'
                 options.StrictMode(1,1) logical = true
             end
 
@@ -60,6 +60,8 @@ classdef ProgressbarCollection < handle
                 obj.progressbarView %= progressbar.ProgressbarText();
             elseif isequal(options.Backend,'GUI')
                 obj.progressbarView = progressbar.ProgressbarViewGUI(obj.progressbarModel);
+            elseif isequal(options.Backend,'None')
+                obj.progressbarView = progressbar.ProgressbarViewNone(obj.progressbarModel);
             else
                 error("ProgressbarCollection:internal","Should not be this branch. Internal implementation error.");
             end
