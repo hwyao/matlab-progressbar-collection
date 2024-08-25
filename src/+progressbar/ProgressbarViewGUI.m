@@ -9,6 +9,9 @@ classdef ProgressbarViewGUI < progressbar.IProgressbarView
         
         % the progressbar handle
         d (1,1)
+
+        % the Estimator handle
+        est
     end
 
     methods
@@ -29,6 +32,8 @@ classdef ProgressbarViewGUI < progressbar.IProgressbarView
             obj.fig = uifigure(namedArgs);
 
             obj.d = uiprogressdlg(obj.fig, 'Title','Please Wait', 'Message','Loading');
+
+            obj.est = ETAEstimator.Estimator();
 
             % Refresh the view for the first time 
             obj.onDataChanged() 
@@ -65,6 +70,7 @@ classdef ProgressbarViewGUI < progressbar.IProgressbarView
                             progress = double(value)/double(maximum);
                             obj.d.Value = progress;
                             obj.d.Indeterminate = 'off';
+                            [H, M, S] = obj.est.estimate(progress);
                         end
                     end
                     if maximum == 0
@@ -72,6 +78,10 @@ classdef ProgressbarViewGUI < progressbar.IProgressbarView
                     else
                         message = message + description + ' [' + value +'/'+maximum +']'+newline;
                     end
+                end
+
+                if maximum ~= 0
+                    message = message + 'ETA: ' +sprintf("%02d",H)+ ':' +sprintf("%02d",M)+ ':' +sprintf("%02d",S)+ ' ';
                 end
                 obj.d.Message = message;
             end
