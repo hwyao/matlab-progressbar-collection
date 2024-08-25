@@ -14,14 +14,23 @@ In short: A intuitive matlab progressbar class aimed for interfacing different v
 - [x] Parallel loop support.
 - [x] Nested loop support.
 - [x] Unit testing for ensuring code behavior and quality.
+- [x] Robust ETA (for GUI). 
 - [ ] Add parameters to control and reduce the display refresh frequency.
 - [ ] Automatically start a new GUI window when it is closed unexpectedly.
 
 ## Usage
 
+### Play this progress bar
+
 1. Clone the repository.
-2. Load the project file.
-3. Now we have class `ProgressbarCollection()` that manages the progressbar.
+2. Load the matlab project file `matlab-progressbar-collection.prj`.
+3. Use class `ProgressbarCollection()` to manage the progressbar.
+
+### Use it in your project
+
+1. [Setup your own project](https://www.mathworks.com/help/simulink/project-management.html?s_tid=CRUX_lftnav) in Matlab.
+2. Clone this reposity somewhere in your project. (or add as [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules), if you also use git in your project)
+3. [Reference this project](https://www.mathworks.com/help/simulink/slref/referencing-projects-from-a-simulink-project.html) in your project files.
 
 
 ## Usage Example 
@@ -63,6 +72,7 @@ delete(progressbar)
 
 
 **Multiple level example**
+(GIF not updated for ETA)
 ```Matlab
 progressbar = ProgressbarCollection();
 
