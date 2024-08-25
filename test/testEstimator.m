@@ -68,38 +68,38 @@ classdef testEstimator < matlab.unittest.TestCase
         function EstTest2(testCase)
             est = ETAEstimator.Estimator(3, 0.8);
             
-            [H, M, S] = est.estimate(0.1);
+            [H, M, S] = est.estimate(0.01);
             testCase.verifyEqual(H, 0)
             testCase.verifyEqual(M, 0)
             testCase.verifyEqual(S, 0)
 
             pause(0.1);
-            [H, M, S] = est.estimate(0.2);
+            [H, M, S] = est.estimate(0.02);
             testCase.verifyEqual(H, 0)
             testCase.verifyEqual(M, 0)
             testCase.verifyEqual(S, 0)
 
             pause(0.1);
-            [H, M, S] = est.estimate(0.3);
+            [H, M, S] = est.estimate(0.03);
             testCase.verifyGreaterThan(3600*H + 60*M + S, 0)
             H_mid = H;
             M_mid = M;
             S_mid = S;
 
             pause(0.1);
+            [H, M, S] = est.estimate(0.2);
+            testCase.verifyEqual(H, H_mid)
+            testCase.verifyEqual(M, M_mid)
+            testCase.verifyEqual(S, S_mid)
+
+            pause(0.1);
+            [H, M, S] = est.estimate(0.3);
+            testCase.verifyEqual(H, H_mid)
+            testCase.verifyEqual(M, M_mid)
+            testCase.verifyEqual(S, S_mid)
+
+            pause(0.1);
             [H, M, S] = est.estimate(0.4);
-            testCase.verifyEqual(H, H_mid)
-            testCase.verifyEqual(M, M_mid)
-            testCase.verifyEqual(S, S_mid)
-
-            pause(0.1);
-            [H, M, S] = est.estimate(0.5);
-            testCase.verifyEqual(H, H_mid)
-            testCase.verifyEqual(M, M_mid)
-            testCase.verifyEqual(S, S_mid)
-
-            pause(0.1);
-            [H, M, S] = est.estimate(0.6);
             testCase.verifyGreaterThan(3600*H_mid + 60*M_mid + S_mid, 3600*H + 60*M + S)
         end
 
