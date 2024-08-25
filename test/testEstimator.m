@@ -100,7 +100,7 @@ classdef testEstimator < matlab.unittest.TestCase
 
             pause(0.1);
             [H, M, S] = est.estimate(0.4);
-            testCase.verifyGreaterThanEqual(3600*H_mid + 60*M_mid + S_mid, 3600*H + 60*M + S)
+            testCase.verifyGreaterThan(3600*H_mid + 60*M_mid + S_mid, 3600*H + 60*M + S)
         end
 
         function EstTestError(testCase)
